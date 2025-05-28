@@ -1,0 +1,21 @@
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
+
+# Ansible
+*.retry
+
+# AWS credentials and keys
+project_access/
+*.pem
+*.csv
+*.sh
+
+# Vagrant local files
+.vagrant/
+
+# System files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EC2 Metadata Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1f1f1f;
+      color: #f1f1f1;
+      padding: 2rem;
+    }
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      width: 60%;
+    }
+    td, th {
+      border: 1px solid #666;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1 align="center">Hello from {{ ansible_hostname }}</h1>
+  <table>
+    <tr><th>Instance ID</th><td>{{ instance_id }}</td></tr>
+    <tr><th>Availability Zone</th><td>{{ instance_az }}</td></tr>
+    <tr><th>Instance Type</th><td>{{ instance_type }}</td></tr>
+    <tr><th>Region</th><td>{{ instance_region }}</td></tr>
+  </table>
+</body>
+</html>

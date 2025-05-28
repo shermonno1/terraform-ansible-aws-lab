@@ -1,0 +1,8 @@
+---
+- name: Configure EC2 Web Servers
+  hosts: webservers
+  become: yes
+  vars:
+    metadata_url: "http://169.254.169.254/latest/dynamic/instance-identity/document"
+  roles:
+    - webserver

@@ -1,0 +1,33 @@
+---
+- name: Ensure Apache is installed
+  yum:
+    name: httpd
+    state: present
+
+- name: Ensure Apache is started and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Get EC2 metadata
+  uri:
+    url: http://169.254.169.254/latest/dynamic/instance-identity/document
+    method: GET
+    return_content: yes
+  register: ec2_metadata
+
+- name: Parse EC2 metadata into variables
+  set_fact:
+    instance_id: "{{ ec2_metadata.content | from_json | json_query('instanceId') }}"
+    instance_az: "{{ ec2_metadata.content | from_json | json_query('availabilityZone') }}"
+    instance_type: "{{ ec2_metadata.content | from_json | json_query('instanceType') }}"
+    instance_region: "{{ ec2_metadata.content | from_json | json_query('region') }}"
+
+- name: Create index.html using instance metadata
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: apache
+    group: apache
+    mode: '0644'
