@@ -56,6 +56,9 @@ By the end of this project, you’ll have:
     ├── terraform.tfvars              # Input variables
     └── variables.tf                  # Variable definitions
 ```
+## Architecture Diagram
+
+![AWS DevOps Architecture](./aws-architecture.png)
 
 ## Tools Used
 
