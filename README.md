@@ -121,14 +121,30 @@ git clone https://github.com/yourusername/aws-devops-project.git
 cd aws-devops-project
 ```
 
-### 2. Start the Local VM (Optional)
+### 2. Start the Local VM (Optional if using Vagrant)
 
 ```bash
 vagrant up
 vagrant ssh
 ```
 
-### 3. Run Terraform
+### 3. Load Your AWS Credentials
+
+Inside the VM, run: 
+```bash
+source ~/aws-project-creds.sh
+```
+Important: You must edit the aws-project-creds.sh file and replace the placeholder values with your actual AWS credentials.
+
+It should contain:
+```bash
+export AWS_ACCESS_KEY_ID="your-access-key"
+export AWS_SECRET_ACCESS_KEY="your-secret-key"
+export AWS_DEFAULT_REGION="us-east-1"
+```
+Make sure the file has proper permissions (e.g., chmod 600) and is not committed to GitHub.
+
+### 4. Run Terraform
 
 ```bash
 cd terraform
@@ -136,22 +152,22 @@ terraform init
 terraform apply
 ```
 
-### 4. Configure Ansible Inventory
+### 5. Configure Ansible Inventory
 
 Update `inventory_static.ini` with your EC2 IPs.
 
-### 5. Run Ansible Playbook
+### 6. Run Ansible Playbook
 
 ```bash
 cd ../ansible
 ansible-playbook -i inventory_static.ini playbook.yml
 ```
 
-### 6. Visit Your Web Pages
+### 7. Visit Your Web Pages
 
 Use the public IPs from Terraform output or test load balancer DNS.
 
-### 7. Destroy to Save Cost
+### 8. Destroy to Save Cost
 
 ```bash
 cd ../terraform
