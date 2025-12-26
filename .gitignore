@@ -19,3 +19,5 @@ project_access/
 # System files
 .DS_Store
 Thumbs.db
+Vagrantfile.almalinux.bak
+.vscode/
