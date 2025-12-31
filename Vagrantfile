@@ -23,14 +23,17 @@ EOF
     # Base utilities (do not fail if repos are unavailable)
     sudo dnf -y install curl unzip python3 python3-pip || true
 
+    sudo -u vagrant python3 -m pip install --user ansible
+
     # Ansible via pip for the vagrant user (works without RHSM repos)
     sudo -u vagrant python3 -m pip install --user --upgrade pip
     sudo -u vagrant python3 -m pip install --user ansible
+    sudo -u vagrant python3 -m pip install --user jmespath
 
-    # Ensure vagrant user's PATH includes ~/.local/bin (extra safety)
-    if ! sudo -u vagrant grep -q 'PATH=.*\\.local/bin' /home/vagrant/.bashrc; then
-      echo 'export PATH="$HOME/.local/bin:$PATH"' | sudo -u vagrant tee -a /home/vagrant/.bashrc >/dev/null
-    fi
+  # Ensure vagrant user's PATH includes ~/.local/bin (extra safety)
+  if ! sudo -u vagrant grep -q 'PATH=.*\.local/bin' /home/vagrant/.bashrc; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' | sudo -u vagrant tee -a /home/vagrant/.bashrc >/dev/null
+  fi
 
     # Terraform via official static zip (arm64)
     TF_VER="1.10.0"
